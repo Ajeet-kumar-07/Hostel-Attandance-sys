@@ -19,7 +19,7 @@ const Attendance = () => {
   const [attendance, setAttendance] = useState<AttendanceRecord[]>([]);
   const [date, setDate] = useState<string>(new Date().toISOString().split('T')[0]);
 
-  const API = "http://localhost:5000/api";
+  const API = "https://hostel-backend-sbot.onrender.com";
 
   const fetchStudents = async () => {
     const res = await fetch(`${API}/students`);

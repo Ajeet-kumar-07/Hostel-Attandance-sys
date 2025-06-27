@@ -9,7 +9,7 @@ const Dashboard = () => {
   const [showConfetti, setShowConfetti] = useState(false);
   const [date] = useState<string>(new Date().toISOString().split('T')[0]);
 
-  const API = "http://localhost:5000/api";
+  const API = "https://hostel-backend-sbot.onrender.com";
   const { width, height } = useWindowSize();
 
   const fetchStudentCount = async () => {
