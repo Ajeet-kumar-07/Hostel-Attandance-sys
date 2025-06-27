@@ -9,17 +9,17 @@ const Dashboard = () => {
   const [showConfetti, setShowConfetti] = useState(false);
   const [date] = useState<string>(new Date().toISOString().split('T')[0]);
 
-  const API = "https://hostel-backend-sbot.onrender.com";
+  const API = "http://localhost:5000";
   const { width, height } = useWindowSize();
 
   const fetchStudentCount = async () => {
-    const res = await fetch(`${API}/students`);
+    const res = await fetch(`${API}/api/students`);
     const data = await res.json();
     setStudentCount(data.length);
   };
 
   const fetchAttendance = async () => {
-    const res = await fetch(`${API}/attendance/${date}`);
+    const res = await fetch(`${API}/api/attendance/${date}`);
     const data = await res.json();
     if (data.records) {
       const present = data.records.filter((r: any) => r.status === 'present');

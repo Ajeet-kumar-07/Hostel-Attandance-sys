@@ -19,16 +19,16 @@ const Attendance = () => {
   const [attendance, setAttendance] = useState<AttendanceRecord[]>([]);
   const [date, setDate] = useState<string>(new Date().toISOString().split('T')[0]);
 
-  const API = "https://hostel-backend-sbot.onrender.com";
+  const API = "http://localhost:5000";
 
   const fetchStudents = async () => {
-    const res = await fetch(`${API}/students`);
+    const res = await fetch(`${API}/api/students`);
     const data = await res.json();
     setStudents(data);
   };
 
   const fetchAttendanceByDate = async () => {
-    const res = await fetch(`${API}/attendance/${date}`);
+    const res = await fetch(`${API}/api/attendance/${date}`);
     const data = await res.json();
     if (data?.records) {
       setAttendance(data.records.map((r: any) => ({
@@ -69,7 +69,7 @@ const Attendance = () => {
   };
 
   const handleSubmit = async () => {
-    await fetch(`${API}/attendance`, {
+    await fetch(`${API}/api/attendance`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ date, records: attendance })

@@ -6,11 +6,11 @@ import { motion } from 'framer-motion';
 const Login = () => {
   const [form, setForm] = useState({ username: '', password: '' });
   const navigate = useNavigate();
-  const api = "https://hostel-backend-sbot.onrender.comi";
+  const api = "http://localhost:5000";
 
   const handleLogin = async () => {
     try {
-      const res = await fetch(`${api}/auth/login`, {
+      const res = await fetch(`${api}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),

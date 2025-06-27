@@ -13,10 +13,10 @@ const Students = () => {
   const [form, setForm] = useState<Student>({ name: '', email: '', course: '' });
   const [editId, setEditId] = useState<string | null>(null);
 
-  const API = "https://hostel-backend-sbot.onrender.com";
+  const API = "http://localhost:5000";
 
   const fetchStudents = async () => {
-    const res = await fetch(`${API}/students`);
+    const res = await fetch(`${API}/api/students`);
     const data = await res.json();
     setStudents(data);
   };
@@ -32,14 +32,14 @@ const Students = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (editId) {
-      await fetch(`${API}/students/${editId}`, {
+      await fetch(`${API}/api/students/${editId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
       toast.success('✅ Student updated');
     } else {
-      await fetch(`${API}/students`, {
+      await fetch(`${API}/api/students`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
@@ -53,7 +53,7 @@ const Students = () => {
   };
 
   const handleDelete = async (id: string) => {
-    await fetch(`${API}/students/${id}`, { method: 'DELETE' });
+    await fetch(`${API}/api/students/${id}`, { method: 'DELETE' });
     toast.info('🗑️ Student deleted');
     fetchStudents();
   };
