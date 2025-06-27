@@ -1,10 +1,10 @@
-# 🏨 Hostel Management System (Full Stack MERN)
+# Hostel Management System (Full Stack MERN)
 
 A modern, hassle-free hostel management web app built using the MERN stack. It helps students apply for leave, track attendance, mark late entries, and more — with dedicated roles for students, guards, and admins.
 
 ---
 
-## 🚀 Features
+##  Features
 
 - ✅ Admin Registration & Login (Custom Auth)
 - 📅 Attendance Dashboard with Progress Bar & Confetti
@@ -13,7 +13,7 @@ A modern, hassle-free hostel management web app built using the MERN stack. It h
 
 ---
 
-## 🧰 Tech Stack
+##  Tech Stack
 
 | Tech         | Usage                   |
 |--------------|-------------------------|
@@ -63,6 +63,22 @@ npm install
 MONGO_URI=your_mongodb_connection_string
 PORT=5000
 ```
+###4. start the server 
+```bash
+npm start
+```
+
+###5.Setup Frontend
+```bash
+cd ../client
+npm install
+```
+
+###6. start react frontend
+```bash
+npm run dev
+```
+
 
 
 
