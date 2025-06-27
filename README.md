@@ -52,51 +52,43 @@ A modern, hassle-free hostel management web app built using the MERN stack. It h
 git clone https://github.com/your-username/hostel-management-system.git
 cd hostel-management-system
 ```
-###2.Setup Backend
+### 2.Setup Backend
 ```bash
 cd server
 npm install
 ```
 
-###3. Create .env File in server/
+### 3. Create .env File in server/
 ```bash
 MONGO_URI=your_mongodb_connection_string
 PORT=5000
 ```
-###4. start the server 
+### 4. start the server 
 ```bash
 npm start
 ```
 
-###5.Setup Frontend
+### 5.Setup Frontend
 ```bash
 cd ../client
 npm install
 ```
 
-###6. start react frontend
+### 6. start react frontend
 ```bash
 npm run dev
 ```
 
 
-##🙌 Contributing
+## 🙌 Contributing
 Contributions, issues, and feature requests are welcome!
 
 
-##📜 License
+## 📜 License
 MIT License. Use it freely for educational or commercial purposes.
 
 
----
 
-### 🔁 Replace Before Push
-
-- `Ajeet-kumar-07` → your actual GitHub username
-- Add live demo link if deployed
-- Optional: include screenshots using `![screenshot](./path.png)`
-
----
 
 
 
