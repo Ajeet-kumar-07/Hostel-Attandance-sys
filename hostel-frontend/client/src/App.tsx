@@ -7,7 +7,6 @@ import Attendance from './pages/Attendance';
 import Login from './pages/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 import Register from './pages/Register';
-import GuardLateEntry from './pages/GuardLateEntry';
 
 
 function App() {
@@ -18,7 +17,6 @@ function App() {
         <Routes>
           <Route path="/register" element={<Register />} />
           <Route path="/Login" element = {<Login/>} />
-          <Route path="/guard-late-entry" element = {<GuardLateEntry/>} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/students" element={<ProtectedRoute><Students/></ProtectedRoute>} />
           <Route path="/attendance" element={<ProtectedRoute><Attendance /></ProtectedRoute>} />
