@@ -80,5 +80,24 @@ npm run dev
 ```
 
 
+##🙌 Contributing
+Contributions, issues, and feature requests are welcome!
+
+
+##📜 License
+MIT License. Use it freely for educational or commercial purposes.
+
+
+---
+
+### 🔁 Replace Before Push
+
+- `Ajeet-kumar-07` → your actual GitHub username
+- Add live demo link if deployed
+- Optional: include screenshots using `![screenshot](./path.png)`
+
+---
+
+
 
 
