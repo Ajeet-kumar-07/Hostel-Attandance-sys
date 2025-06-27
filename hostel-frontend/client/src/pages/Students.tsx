@@ -1,6 +1,5 @@
-
 import React, { useEffect, useState } from 'react';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 
 interface Student {
   _id?: string;
@@ -36,17 +35,18 @@ const Students = () => {
       await fetch(`${API}/students/${editId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form)
+        body: JSON.stringify(form),
       });
-      toast.success('Student updated successfully');
+      toast.success('✅ Student updated');
     } else {
       await fetch(`${API}/students`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form)
+        body: JSON.stringify(form),
       });
-      toast.success('Student added successfully');
+      toast.success('✅ Student added');
     }
+
     setForm({ name: '', email: '', course: '' });
     setEditId(null);
     fetchStudents();
@@ -54,7 +54,7 @@ const Students = () => {
 
   const handleDelete = async (id: string) => {
     await fetch(`${API}/students/${id}`, { method: 'DELETE' });
-    toast.info('Student Deleted');
+    toast.info('🗑️ Student deleted');
     fetchStudents();
   };
 
@@ -64,41 +64,76 @@ const Students = () => {
   };
 
   return (
-    <div className='p-6'>
-      <h1 className='text-3xl font-bold mb-4'>Students</h1>
+    <div className='p-6 max-w-5xl mx-auto'>
+      <h1 className='text-4xl font-bold text-blue-800 mb-6'>🎓 Manage Students</h1>
 
-      <form onSubmit={handleSubmit} className='mb-6 space-y-3'>
-        <input name='name' value={form.name} onChange={handleChange} placeholder='Name' className='border p-2 w-full' />
-        <input name='email' value={form.email} onChange={handleChange} placeholder='Email' className='border p-2 w-full' />
-        <input name='course' value={form.course} onChange={handleChange} placeholder='Course' className='border p-2 w-full' />
-        <button type='submit' className='bg-blue-600 text-white px-4 py-2 rounded'>
-          {editId ? 'Update Student' : 'Add Student'}
+      <form onSubmit={handleSubmit} className='bg-white rounded-lg shadow p-6 space-y-4 mb-8'>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+          <input
+            name='name'
+            value={form.name}
+            onChange={handleChange}
+            placeholder='Full Name'
+            className='border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm'
+          />
+          <input
+            name='email'
+            value={form.email}
+            onChange={handleChange}
+            placeholder='Email'
+            className='border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm'
+          />
+          <input
+            name='course'
+            value={form.course}
+            onChange={handleChange}
+            placeholder='Course'
+            className='border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm'
+          />
+        </div>
+        <button
+          type='submit'
+          className='bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300'
+        >
+          {editId ? '✏️ Update Student' : '➕ Add Student'}
         </button>
       </form>
 
-      <table className='min-w-full border'>
-        <thead className='bg-gray-200'>
-          <tr>
-            <th className='p-2'>Name</th>
-            <th className='p-2'>Email</th>
-            <th className='p-2'>Course</th>
-            <th className='p-2'>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {students.map((student) => (
-            <tr key={student._id}>
-              <td className='border p-2'>{student.name}</td>
-              <td className='border p-2'>{student.email}</td>
-              <td className='border p-2'>{student.course}</td>
-              <td className='border p-2'>
-                <button onClick={() => handleEdit(student)} className='mr-2 text-blue-600'>Edit</button>
-                <button onClick={() => handleDelete(student._id!)} className='text-red-600'>Delete</button>
-              </td>
+      <div className='overflow-x-auto rounded-lg shadow'>
+        <table className='min-w-full border text-sm'>
+          <thead className='bg-blue-100 text-blue-800'>
+            <tr>
+              <th className='p-3 border-b'>Name</th>
+              <th className='p-3 border-b'>Email</th>
+              <th className='p-3 border-b'>Course</th>
+              <th className='p-3 border-b'>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className='bg-white'>
+            {students.map((student) => (
+              <tr key={student._id} className='hover:bg-gray-50'>
+                <td className='p-3 border-b'>{student.name}</td>
+                <td className='p-3 border-b'>{student.email}</td>
+                <td className='p-3 border-b'>{student.course}</td>
+                <td className='p-3 border-b space-x-2'>
+                  <button
+                    onClick={() => handleEdit(student)}
+                    className='px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-white rounded transition duration-200'
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(student._id!)}
+                    className='px-3 py-1 bg-red-600 hover:bg-red-700 text-white rounded transition duration-200'
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

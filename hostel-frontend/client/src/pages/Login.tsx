@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { motion } from 'framer-motion';
 
 const Login = () => {
   const [form, setForm] = useState({ username: '', password: '' });
   const navigate = useNavigate();
   const api = "http://localhost:5000/api";
+
   const handleLogin = async () => {
     try {
       const res = await fetch(`${api}/auth/login`, {
@@ -17,35 +19,47 @@ const Login = () => {
       const data = await res.json();
       if (res.ok) {
         localStorage.setItem('token', data.token);
-        toast.success('Login successful');
+        toast.success('🎉 Login successful');
         navigate('/dashboard');
       } else {
         toast.error(data.error || 'Login failed');
       }
     } catch (err) {
-      toast.error('Server error');
+      toast.error('❌ Server error');
     }
   };
 
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen'>
-      <div className='bg-white p-8 shadow-md rounded-md w-full max-w-sm'>
-        <h2 className='text-xl font-bold mb-4'>Login</h2>
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 via-white to-blue-200">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl p-8 w-full max-w-sm border border-blue-200"
+      >
+        <h2 className="text-3xl font-bold text-center mb-6 text-blue-700">🔐 Login</h2>
+
         <input
-          className='w-full p-2 mb-3 border rounded'
-          placeholder='Username'
+          type="text"
+          placeholder="Username"
+          value={form.username}
           onChange={(e) => setForm({ ...form, username: e.target.value })}
+          className="w-full mb-4 p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
         />
         <input
-          className='w-full p-2 mb-3 border rounded'
-          type='password'
-          placeholder='Password'
+          type="password"
+          placeholder="Password"
+          value={form.password}
           onChange={(e) => setForm({ ...form, password: e.target.value })}
+          className="w-full mb-6 p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
         />
-        <button onClick={handleLogin} className='bg-blue-600 text-white w-full py-2 rounded'>
-          Login
+        <button
+          onClick={handleLogin}
+          className="w-full bg-blue-600 hover:bg-blue-700 transition duration-200 text-white py-2 rounded font-semibold shadow-md"
+        >
+          🚀 Login
         </button>
-      </div>
+      </motion.div>
     </div>
   );
 };

@@ -1,7 +1,6 @@
-
 import React, { useEffect, useState } from 'react';
 import { saveAs } from 'file-saver';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 
 interface Student {
   _id: string;
@@ -75,7 +74,7 @@ const Attendance = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ date, records: attendance })
     });
-    toast.success('Attendance saved successfully');
+    toast.success('✅ Attendance saved successfully');
   };
 
   const handleExport = () => {
@@ -89,48 +88,69 @@ const Attendance = () => {
         .join('\n');
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     saveAs(blob, `attendance_${date}.csv`);
-    toast.info('CSV exported');
+    toast.info('📤 CSV exported');
   };
 
   return (
-    <div className='p-6'>
-      <h1 className='text-3xl font-bold mb-4'>Attendance</h1>
+    <div className='p-6 max-w-5xl mx-auto'>
+      <h1 className='text-4xl font-bold text-blue-800 mb-6'>📋 Attendance Management</h1>
 
-      <div className='flex items-center gap-4 mb-4'>
-        <label htmlFor='date'>Select Date:</label>
-        <input type='date' value={date} onChange={(e) => setDate(e.target.value)} className='border px-3 py-2' />
-        <button onClick={handleExport} className='bg-green-600 text-white px-4 py-2 rounded'>Export CSV</button>
+      <div className='flex flex-col md:flex-row items-center gap-4 mb-6'>
+        <label htmlFor='date' className='text-gray-700 font-medium'>Select Date:</label>
+        <input
+          type='date'
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          className='border rounded-lg px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400'
+        />
+        <button
+          onClick={handleExport}
+          className='bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg transition duration-300 shadow-sm'
+        >
+          ⬇️ Export CSV
+        </button>
       </div>
 
-      <table className='min-w-full border'>
-        <thead className='bg-gray-200'>
-          <tr>
-            <th className='p-2'>Name</th>
-            <th className='p-2'>Email</th>
-            <th className='p-2'>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {students.map((student) => (
-            <tr key={student._id}>
-              <td className='border p-2'>{student.name}</td>
-              <td className='border p-2'>{student.email}</td>
-              <td className='border p-2'>
-                <button
-                  onClick={() => toggleStatus(student._id)}
-                  className={`px-4 py-1 rounded text-white ${getStatus(student._id) === 'present' ? 'bg-blue-600' : 'bg-red-600'}`}
-                >
-                  {getStatus(student._id)}
-                </button>
-              </td>
+      <div className="overflow-x-auto rounded-lg shadow">
+        <table className='min-w-full text-sm text-left border-collapse'>
+          <thead className='bg-blue-100 text-blue-800'>
+            <tr>
+              <th className='p-3 border-b'>Name</th>
+              <th className='p-3 border-b'>Email</th>
+              <th className='p-3 border-b'>Status</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className='bg-white'>
+            {students.map((student) => (
+              <tr key={student._id} className='hover:bg-gray-50'>
+                <td className='p-3 border-b'>{student.name}</td>
+                <td className='p-3 border-b'>{student.email}</td>
+                <td className='p-3 border-b'>
+                  <button
+                    onClick={() => toggleStatus(student._id)}
+                    className={`px-4 py-1 rounded-full font-medium transition duration-300 shadow-sm ${
+                      getStatus(student._id) === 'present'
+                        ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                        : 'bg-red-600 hover:bg-red-700 text-white'
+                    }`}
+                  >
+                    {getStatus(student._id)}
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-      <button onClick={handleSubmit} className='mt-4 bg-blue-700 text-white px-4 py-2 rounded'>
-        Save Attendance
-      </button>
+      <div className='mt-6 flex justify-end'>
+        <button
+          onClick={handleSubmit}
+          className='bg-blue-700 hover:bg-blue-800 text-white px-6 py-2 rounded-lg font-semibold transition duration-300 shadow-md'
+        >
+          💾 Save Attendance
+        </button>
+      </div>
     </div>
   );
 };

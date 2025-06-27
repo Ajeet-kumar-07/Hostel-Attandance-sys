@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { motion } from 'framer-motion';
 
 const Register = () => {
   const [form, setForm] = useState({ username: '', password: '' });
@@ -17,38 +18,47 @@ const Register = () => {
 
       const data = await res.json();
       if (res.ok) {
-        toast.success('Registration successful. Please login.');
+        toast.success('🎉 Registration successful. Please login.');
         navigate('/login');
       } else {
         toast.error(data.error || 'Registration failed');
       }
     } catch (err) {
-      toast.error('Server error');
+      toast.error('❌ Server error');
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-6 rounded-md shadow-md w-full max-w-sm">
-        <h2 className="text-xl font-bold mb-4">Register</h2>
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-100 via-white to-green-200">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="bg-white/70 backdrop-blur-md shadow-lg border border-green-200 rounded-xl p-8 w-full max-w-sm"
+      >
+        <h2 className="text-3xl font-bold text-center mb-6 text-green-700">📝 Register</h2>
+
         <input
-          className="w-full p-2 mb-3 border rounded"
+          type="text"
           placeholder="Username"
+          value={form.username}
           onChange={(e) => setForm({ ...form, username: e.target.value })}
+          className="w-full mb-4 p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200"
         />
         <input
-          className="w-full p-2 mb-3 border rounded"
           type="password"
           placeholder="Password"
+          value={form.password}
           onChange={(e) => setForm({ ...form, password: e.target.value })}
+          className="w-full mb-6 p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200"
         />
         <button
           onClick={handleRegister}
-          className="bg-green-600 text-white w-full py-2 rounded"
+          className="w-full bg-green-600 hover:bg-green-700 transition duration-200 text-white py-2 rounded font-semibold shadow-md"
         >
-          Register
+          🚀 Register
         </button>
-      </div>
+      </motion.div>
     </div>
   );
 };

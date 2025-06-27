@@ -24,21 +24,28 @@ const JWT_SECRET = 'helloajeet123';
 //   };
 
 router.post('/register', async (req, res) => {
-    const { username, password } = req.body;
-    
-    try {
-      const existing = await User.findOne({ username });
-      if (existing) return res.status(400).json({ error: 'User already exists' });
-      
+  const { username, password } = req.body;
+  console.log("👉 Received Register:", req.body);
+
+  try {
+    const existing = await User.findOne({ username });
+    if (existing) {
+      console.log("⚠️ User already exists");
+      return res.status(400).json({ error: 'User already exists' });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({ username, password: hashedPassword });
     await user.save();
-    
+    console.log("✅ User saved:", user);
+
     res.status(201).json({ message: 'User registered successfully' });
   } catch (err) {
+    console.error("❌ Server error:", err);
     res.status(500).json({ error: 'Server error' });
   }
 });
+
 
 //login 
 
@@ -61,5 +68,3 @@ router.post('/login' , async (req , res) => {
 
 
 module.exports = router;
-
-
