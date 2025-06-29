@@ -25,7 +25,7 @@ const JWT_SECRET = 'helloajeet123';
 
 router.post('/register', async (req, res) => {
   const { username, password } = req.body;
-  console.log("👉 Received Register:", req.body);
+  // console.log("👉 Received Register:", req.body);
 
   try {
     const existing = await User.findOne({ username });
@@ -37,7 +37,7 @@ router.post('/register', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({ username, password: hashedPassword });
     await user.save();
-    console.log("✅ User saved:", user);
+    // console.log("✅ User saved:", user);
 
     res.status(201).json({ message: 'User registered successfully' });
   } catch (err) {
