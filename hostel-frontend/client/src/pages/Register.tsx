@@ -7,7 +7,7 @@ const Register = () => {
   const [form, setForm] = useState({ username: '', password: '' });
   const navigate = useNavigate();
   // const api = "https://hostel-backend-sbot.onrender.com";
-  const api = "http://localhost:5000";
+  const api = "https://hostel-backend-sbot.onrender.com";
 
   const handleRegister = async () => {
     try {
