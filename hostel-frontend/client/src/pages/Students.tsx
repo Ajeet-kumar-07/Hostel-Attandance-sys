@@ -13,7 +13,7 @@ const Students = () => {
   const [form, setForm] = useState<Student>({ name: '', email: '', course: '' });
   const [editId, setEditId] = useState<string | null>(null);
 
-  const API = "http://localhost:5000";
+  const API = "https://hostel-backend-sbot.onrender.com";
 
   const fetchStudents = async () => {
     const res = await fetch(`${API}/api/students`);
